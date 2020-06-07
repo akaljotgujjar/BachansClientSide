@@ -1,1 +1,41 @@
-<p>bachan works!</p>
+<form class="form-inline d-flex justify-content-center md-form form-sm active-cyan-2 mt-2">
+    <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search books by name, author"
+      aria-label="Search">
+    <button class="fontFamily btn btn-info" type="button" color="info" type="search"> <i class="fas fa-search"></i>
+    </button>
+    <button class="functionButton btn btn-primary" type="button" color="primary" (click)="goToCreate()">Add Book</button>
+    <button type="button" class="btn btn-success" color="success" [routerLink]="'/shoppingcart'"><i
+        class="fas fa-shopping-cart"></i></button>
+  </form>
+  
+  
+  <div class="book-card-container">
+    <mat-card class="boxShadow item-card" *ngFor="let book of books; let i = index">
+      <mat-toolbar color="warn" class="toolbar">
+        <mat-toolbar-row>
+          <mat-card-title class="title">{{book.name}}</mat-card-title>
+          <mat-card-subtitle></mat-card-subtitle>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <img class="list-cover-image" mat-card-image [src]="book.image_url" alt="book">
+      <mat-card-content>
+        <P>Author: {{book.author}}</P>
+        <P>ISBN: {{book.isbn}}</P>
+      </mat-card-content>
+      <mat-card-actions>
+        <button type="button" class="btn btn-success" (click)="AddToCart(book)" color="success">
+          <i class="fas fa-dollar-sign"></i>
+          {{book.price}}
+          <i class="fas fa-shopping-cart"></i>
+        </button>
+        <div class="btn-group pull-right">
+          <button type="button" class="btn btn-secondary" [routerLink]="['/book-edit', book.id]">
+            <mat-icon class="example-icon">edit</mat-icon>
+          </button>
+          <button type="button" class="btn btn-danger" (click)="removeBook(book, i)">
+            <i class="far fa-trash-alt"></i>
+          </button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
